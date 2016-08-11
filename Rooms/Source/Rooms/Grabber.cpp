@@ -42,6 +42,7 @@ void UGrabber::BeginPlay()
 		UE_LOG(LogTemp, Warning, TEXT("InputHanler found!\n"));
 		//bind the input access
 		InputComponent->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+		InputComponent->BindAction("Grab", IE_Released, this, &UGrabber::ReleaseKey);
 	}
 	else
 	{
@@ -74,15 +75,20 @@ void UGrabber::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 	FHitResult Hit;
 	GetWorld()->LineTraceSingleByObjectType(OUT Hit, PlayerViewPointLocation, LineTraceEnd, FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody), TraceParameters);
 	
-		/// see what we hit
+	/// see what we hit
 	AActor* ActorHit = Hit.GetActor();
 	if (ActorHit)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Line Hit: %s "), *(ActorHit->GetName()));
+		///UE_LOG(LogTemp, Warning, TEXT("Line Hit: %s "), *(ActorHit->GetName()));
 	}
 }
 
 void UGrabber::Grab()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Grabbed pressed "));
+}
+
+void UGrabber::ReleaseKey()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Grabbed Released "));
 }

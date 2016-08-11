@@ -31,5 +31,8 @@ private:
 
 	///grabs what is in reach
 	void Grab();
+
+	///called when grab is released
+	void ReleaseKey();
 	
 };
