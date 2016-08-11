@@ -34,5 +34,10 @@ private:
 
 	///called when grab is released
 	void ReleaseKey();
-	
+
+	//Find attached phyics handler
+	void FindPhysicsHandleComponet();
+
+	//setup input componenet
+	void SetupInputComponet();
 };
