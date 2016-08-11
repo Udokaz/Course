@@ -24,5 +24,7 @@ public:
 private:
 	//Distance user can reach
 	float Reach = 100.0f;
+
+	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	
 };
