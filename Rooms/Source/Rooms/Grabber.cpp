@@ -26,9 +26,10 @@ void UGrabber::BeginPlay()
 
 }
 
+///look for attached physics handle
 void UGrabber::FindPhysicsHandleComponet()
 {
-	///look for attached physics handle
+	
 	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
 	if (PhysicsHandle)
 	{
@@ -40,9 +41,10 @@ void UGrabber::FindPhysicsHandleComponet()
 	}
 }
 
+///look for inputHandler component (only appers at run time)
 void UGrabber::SetupInputComponet()
 {
-	///look for inputHandler
+	
 	InputComponent = GetOwner()->FindComponentByClass<UInputComponent>();
 	if (InputComponent)
 	{
@@ -63,6 +65,9 @@ void UGrabber::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
 
+	//if the physics is attached
+		//move the object we are holding
+
 	/// Get Player Viewport this tick
 	FVector PlayerViewPointLocation;
 	FRotator PlayerViewPointRotation;
@@ -70,9 +75,6 @@ void UGrabber::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 
 	/// red point
 	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
-	
-	/// draw red trace in world to see reach
-	DrawDebugLine(GetWorld(), PlayerViewPointLocation, LineTraceEnd, FColor(255, 0, 0), false, 0.0f, 0.0f, 10.0f);
 
 	/// Setup Query Parameters
 	FCollisionQueryParams TraceParameters(FName(TEXT("")), false, GetOwner());
@@ -92,9 +94,17 @@ void UGrabber::TickComponent( float DeltaTime, ELevelTick TickType, FActorCompon
 void UGrabber::Grab()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Grabbed pressed "));
+
+	//try and reach any actors with physics body collision channel set
+
+	//if we hit something attach physics handle
+	//TODO attach physics handl
+
 }
 
 void UGrabber::ReleaseKey()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Grabbed Released "));
+	///TODO release physics handle
+
 }
